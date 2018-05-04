@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>Lykke.BitcoinGold.Sign.Services</AssemblyName>
+    <RootNamespace>Lykke.BitcoinGold.Sign.Services</RootNamespace>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lykke.Common" Version="6.0.0" />
+    <PackageReference Include="Lykke.SettingsReader" Version="2.1.0" />    
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lykke.Service.BitcoinGold.Sign.Core\Lykke.Service.BitcoinGold.Sign.Core.csproj" />
+  </ItemGroup>
+
+</Project>
