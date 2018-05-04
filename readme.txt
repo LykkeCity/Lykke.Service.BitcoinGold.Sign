@@ -1,0 +1,1 @@
+BitcoinGold Sign Implementation
