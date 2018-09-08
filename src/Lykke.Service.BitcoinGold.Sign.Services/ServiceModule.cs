@@ -12,11 +12,9 @@ namespace Lykke.BitcoinGold.Sign.Services
 {
     public  class ServiceModule:Module
     {
-        private readonly ILog _log;
         private readonly IReloadingManager<BitcoinGoldSignSettings> _settings;
-        public ServiceModule(IReloadingManager<BitcoinGoldSignSettings> settings, ILog log)
+        public ServiceModule(IReloadingManager<BitcoinGoldSignSettings> settings)
         {
-            _log = log;
             _settings = settings;
         }
 
