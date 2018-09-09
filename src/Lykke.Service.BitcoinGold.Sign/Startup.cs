@@ -3,9 +3,11 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Lykke.BitcoinGold.Sign.Services;
+using Lykke.Common.Api.Contract.Responses;
 using Lykke.Common.ApiLibrary.Middleware;
 using Lykke.Common.ApiLibrary.Swagger;
 using Lykke.Logs;
+using Lykke.Service.BitcoinGold.Sign.Core.Exceptions;
 using Lykke.Service.BitcoinGold.Sign.Core.Services;
 using Lykke.Service.BitcoinGold.Sign.Core.Settings;
 using Lykke.Service.BitcoinGold.Sign.Modules;
@@ -75,7 +77,19 @@ namespace Lykke.Service.BitcoinGold.Sign
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseLykkeMiddleware(ex => new { Message = "Technical problem" });
+            app.UseLykkeMiddleware("BitcoinGold.Service.Sign", ex =>
+            {
+                if (ex is BusinessException clientError)
+                {
+                    var response = ErrorResponse.Create(clientError.Text);
+                    response.AddModelError(clientError.Code.ToString(), clientError.Text);
+
+                    return response;
+                }
+
+                return new { Message = "Technical problem" };
+            });
+
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(x =>
