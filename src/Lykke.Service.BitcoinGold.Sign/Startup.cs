@@ -47,8 +47,6 @@ namespace Lykke.Service.BitcoinGold.Sign
             services.AddSwaggerGen(options =>
             {
                 options.DefaultLykkeConfiguration("v1", "BitcoinGold.Service.Sign");
-                options.DescribeAllEnumsAsStrings();
-                options.DescribeStringEnumsInCamelCase();
             });
             services.AddEmptyLykkeLogging();
 
@@ -79,18 +77,7 @@ namespace Lykke.Service.BitcoinGold.Sign
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseLykkeMiddleware(ex =>
-            {
-                if (ex is BusinessException clientError)
-                {
-                    var response = ErrorResponse.Create(clientError.Text);
-                    response.AddModelError(clientError.Code.ToString(), clientError.Text);
-
-                    return response;
-                }
-
-                return new { Message = "Technical problem" };
-            });
+            app.UseLykkeMiddleware(ex => new { Message = "Technical problem" });
 
             app.UseMvc();
             app.UseSwagger();
