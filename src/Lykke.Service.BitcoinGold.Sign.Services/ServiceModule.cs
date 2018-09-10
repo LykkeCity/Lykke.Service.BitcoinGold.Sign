@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Common.Log;
 using Lykke.BitcoinGold.Sign.Services.Sign;
 using Lykke.BitcoinGold.Sign.Services.Wallet;
 using Lykke.Service.BitcoinGold.Sign.Core;
