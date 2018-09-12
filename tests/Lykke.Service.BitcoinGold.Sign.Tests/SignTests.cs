@@ -1,11 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Common;
-using Common.Log;
 using Lykke.BitcoinGold.Sign.Services.Sign;
-using Lykke.Service.BitcoinGold.Sign.Core.Exceptions;
-using Moq;
 using NBitcoin;
 using NBitcoin.Altcoins;
 using NBitcoin.JsonConverters;
@@ -46,7 +41,7 @@ namespace Lykke.Service.BitcoinGold.Sign.Tests
             };
 
 
-            var signer = new TransactionSigningService(network, GetLog());
+            var signer = new TransactionSigningService(network);
             var signedTx2 = signer.Sign(Serializer.ToString(txInfo), new List<string> { key.ToString(network) });
 
             Assert.Equal(signedTx.ToHex(), signedTx2.TransactionHex);
@@ -63,13 +58,6 @@ namespace Lykke.Service.BitcoinGold.Sign.Tests
                 Assert.True(Script.VerifyScript(scriptPubKey, tx, 0, money, ScriptVerify.ForkId, SigHash.All));
             }
         }
-
-
-        private static ILog GetLog()
-        {
-            return new LogToConsole();
-        }
-
         #endregion
     }
 

@@ -1,14 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Common;
-using Common.Log;
 using Lykke.Service.BitcoinGold.Sign.Core.Exceptions;
 using Lykke.Service.BitcoinGold.Sign.Core.Sign;
 using NBitcoin;
 using NBitcoin.Altcoins;
 using NBitcoin.JsonConverters;
-using Newtonsoft.Json;
 
 namespace Lykke.BitcoinGold.Sign.Services.Sign
 {
@@ -36,11 +32,9 @@ namespace Lykke.BitcoinGold.Sign.Services.Sign
     public class TransactionSigningService : ITransactionSigningService
     {
         private readonly Network _network;
-        private readonly ILog _log;
-        public TransactionSigningService(Network network, ILog log)
+        public TransactionSigningService(Network network)
         {
             _network = network;
-            _log = log;
         }
 
         public ISignResult Sign(string transactionContext, IEnumerable<string> privateKeys)

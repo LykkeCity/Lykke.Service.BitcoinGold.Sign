@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Common.Log;
 using Lykke.BitcoinGold.Sign.Services.Sign;
 using Lykke.BitcoinGold.Sign.Services.Wallet;
 using Lykke.Service.BitcoinGold.Sign.Core;
@@ -12,11 +11,9 @@ namespace Lykke.BitcoinGold.Sign.Services
 {
     public  class ServiceModule:Module
     {
-        private readonly ILog _log;
         private readonly IReloadingManager<BitcoinGoldSignSettings> _settings;
-        public ServiceModule(IReloadingManager<BitcoinGoldSignSettings> settings, ILog log)
+        public ServiceModule(IReloadingManager<BitcoinGoldSignSettings> settings)
         {
-            _log = log;
             _settings = settings;
         }
 
